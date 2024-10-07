@@ -1,13 +1,20 @@
 import { Form } from "react-bootstrap";
 import {Button} from "react-bootstrap";
+import { useForm } from "react-hook-form";
 export default function Home() {
+    const {register, handleSubmit} = useForm();
+    const onSubmit = handleSubmit((data) => {
+        console.log(data)
+    })
   return (
     <div className="container mt-5">
       <h1 className="text-center">Formulario con Ract Hook Form</h1>
-      <Form style={{ maxWidth: "500px", margin: "auto" }}>
+      <Form style={{ maxWidth: "500px", margin: "auto" }} onSubmit={onSubmit}>
         <Form.Group className="mb-3" controlId="name">
           <Form.Label>Nombre</Form.Label>
-          <Form.Control type="text" />
+          <Form.Control type="text" {...register('name', {
+            required: true
+          })}/>
         </Form.Group>
         <Form.Group className="mb-3" controlId="email">
           <Form.Label>Correo electrónico</Form.Label>
